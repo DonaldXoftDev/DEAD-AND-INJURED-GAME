@@ -1,6 +1,8 @@
 import random
 import itertools
 
+from Tools.scripts.generate_global_objects import START
+
 new_possible_pins = [list(p) for p in itertools.permutations(range(10), 4)]
 
 def generate_user_pin():
@@ -48,7 +50,7 @@ def generate_computer_guesses():
 
 # User tries to guess the computer pin with his 4 guesses
 # loop through all the user's guess and loop through the computer's pin
-# when a number in the user's guess is in the same position as a number in the computer's pin, it count's as a dead
+# when a number in the user's guess is in the same position as a number in the computer's pin, it counts as a dead
 # when a number in the user's guess is in the computer's pin but at the correct index , it counts as an injured
 
 def compare_guesses(guesses, pin):
@@ -69,11 +71,15 @@ def compare_guesses(guesses, pin):
 
     return {"dead": dead, 'injured': inj}
 
-def message_feedback(game_feed_back, current_player, opponent):
+def message_feedback(game_feed_back,current_player):
     if game_feed_back['dead'] == 4 and game_feed_back['injured'] == 0:
         print(f'All dead')
+
+    elif game_feed_back['dead'] == 0 and game_feed_back['injured'] == 0:
+        print('None is dead')
     else:
-        print(f"{current_player.title()}'s feedback from {opponent.title()}:{game_feed_back['dead']}dead and {game_feed_back['injured']}injured.")
+        print(f"Feedback to {current_player.title()}:"
+              f" {game_feed_back['dead']}dead and {game_feed_back['injured']}injured.")
     print('\n')
 
 
@@ -89,7 +95,7 @@ def message_feedback(game_feed_back, current_player, opponent):
 
 def narrow_down_guess(comp_curr_guess, user_pin):
     feedback_to_computer = compare_guesses(comp_curr_guess, user_pin)
-    message_feedback(feedback_to_computer, 'computer', 'player')
+    message_feedback(feedback_to_computer, 'computer')
 
     global new_possible_pins
     new_possibilities = []

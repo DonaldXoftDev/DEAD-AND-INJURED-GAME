@@ -23,14 +23,14 @@ while Start_Game:
 
     # user tries to guess the computer's pin
     feed_back_to_user = compare_guesses(user_guesses, computer_pin)
-    message_feedback(feed_back_to_user,"player", 'computer')
+    Start_Game = message_feedback(feed_back_to_user,"player")
 
     # computer tries to guess the player's pin as well with a random 4 digit guesses
     # computer compares his current guess with all possible combinations of the guess to
     # get the same feedback and narrow down what the user's pin might be
     narrow_down_guess(computer_guesses, user_pin,)
-
     # the second guess of the computer will be taken from one of the possibilities list
+
 
 
 
