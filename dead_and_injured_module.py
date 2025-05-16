@@ -1,8 +1,6 @@
 import random
 import itertools
 
-from Tools.scripts.generate_global_objects import START
-
 new_possible_pins = [list(p) for p in itertools.permutations(range(10), 4)]
 
 def generate_user_pin():
