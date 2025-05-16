@@ -18,10 +18,12 @@ def generate_user_pin():
                     print(f'That number has either already been entered! or may not be within the range of 0 - 9!')
             except ValueError:
                 print('That is not a number')
+
     return u_pin
 
 
 def get_user_guesses():
+    print("\n------------TIME TO GUESS COMPUTER'S PIN-----------------")
     u_guesses = []
     for j in range(4):
         guessing = True
@@ -35,11 +37,13 @@ def get_user_guesses():
                     print('That number has either already been guessed or is not within the range of 0 - 9!')
             except ValueError:
                 print('That is not a number')
+
     return u_guesses
 
 
 def generate_computer_pin():
     comp_pin = random.choice(new_possible_pins)
+
     return comp_pin
 
 
@@ -72,15 +76,16 @@ def compare_guesses(guesses, pin):
     return {"dead": dead, 'injured': inj}
 
 def message_feedback(game_feed_back,current_player):
+
     if game_feed_back['dead'] == 4 and game_feed_back['injured'] == 0:
-        print(f'All dead')
+        print(f'Feedback to {current_player.title()} : All dead')
 
     elif game_feed_back['dead'] == 0 and game_feed_back['injured'] == 0:
-        print('None is dead')
+        print(f'Feedback to {current_player.title()} : None is dead')
     else:
         print(f"Feedback to {current_player.title()}:"
               f" {game_feed_back['dead']}dead and {game_feed_back['injured']}injured.")
-    print('\n')
+
 
 
 
