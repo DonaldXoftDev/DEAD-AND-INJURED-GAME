@@ -1,14 +1,24 @@
+from prettytable import PrettyTable
+
 from dead_and_injured_module import (generate_user_pin,
                                      generate_computer_pin, get_user_guesses, generate_computer_guesses,
                                      compare_guesses, narrow_down_guess, message_feedback)
+
+from prettytable import PrettyTable
+from arts import game_logo, welcome_image
+
+dead_and_injured_table = PrettyTable()
+dead_and_injured_table.field_names = ['User guesses', 'Feedback to user']
+
+game_icons = [welcome_image, game_logo]
+print(' '.join(game_icons))
 
 user_pin = generate_user_pin()
 computer_pin = generate_computer_pin()
 
 print(f'\n--------PLAYER PIN----------')
-
 print(f'Your PIN: {user_pin}')
-
+print(f'computer: {computer_pin}')
 
 Start_Game = True
 while Start_Game:
@@ -20,22 +30,22 @@ while Start_Game:
     print(f'user guessed : {user_guesses}')
     print(f'computer guessed : {computer_guesses}\n')
 
-
     print('-----------------------FEEDBACKS------------------------')
     # user tries to guess the computer's pin
     feed_back_to_user = compare_guesses(user_guesses, computer_pin)
-    message_feedback(feed_back_to_user,"player")
+    message = message_feedback(feed_back_to_user, "player")
+    dead_and_injured_table.add_row([f'{user_guesses}', f'{message}'])
+    print(dead_and_injured_table)
+
     if feed_back_to_user['dead'] == 4 and feed_back_to_user['injured'] == 0:
+        Start_Game = False
+    if narrow_down_guess(computer_guesses, user_pin):
         Start_Game = False
     # computer tries to guess the player's pin as well with a random 4 digit guesses
     # computer compares his current guess with all possible combinations of the guess to
     # get the same feedback and narrow down what the user's pin might be
-    narrow_down_guess(computer_guesses, user_pin,)
 
-
-
-
-
-
-
-
+print('\n')
+print('-----------------------RESULTS----------------------')
+print(f'Your PIN : {user_pin}')
+print(f'Computer PIN : {computer_pin}')
