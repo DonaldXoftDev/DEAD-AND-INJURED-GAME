@@ -37,13 +37,22 @@ With each guess made by either you or the computer, valuable feedback will be pr
 This project is a tangible outcome of my exploration and growth in the Python programming language. It demonstrates my understanding and application of several key concepts:
 
 * **Modular Design:** Separating the core game logic into the `dead_and_injured_module.py` for better organization and reusability.
+
 * **Functions:** Creating modular blocks of code (like `generate_user_pin`, `compare_guesses`, `narrow_down_guess`) to handle specific tasks.
+
 * **Data Structures:** Utilizing lists to represent the numerical codes and guesses.
+
 * **Input and Output:** Managing user interaction through `input()` and providing clear feedback using `print()` and formatted tables.
+
 * **Game Loop Control:** Implementing `while` loops to manage the flow of the game and determine when it ends.
+
 * **Randomness (`random`):** Introducing unpredictability in the computer's pin generation and initial guesses.
+
 * **Combinatorics (`itertools`):** Leveraging permutations to form the basis of the computer's intelligent guessing strategy, allowing it to systematically narrow down possibilities.
+
 * **Data Presentation (`prettytable`):** Enhancing the user experience by displaying guess history and feedback in an organized table.
+
 * **External Modules (`arts`):** Integrating visual elements (like the game logo) to make the game more engaging.
+
 
 Building Dead and Injured has been a valuable exercise in applying these Python skills to create an interactive and logical game. It reflects my commitment to learning and building increasingly complex and engaging applications. I hope you enjoy playing the result of this ongoing journey!
