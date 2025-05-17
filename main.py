@@ -1,5 +1,3 @@
-from prettytable import PrettyTable
-
 from dead_and_injured_module import (generate_user_pin,
                                      generate_computer_pin, get_user_guesses, generate_computer_guesses,
                                      compare_guesses, narrow_down_guess, message_feedback)
@@ -15,6 +13,8 @@ print(' '.join(game_icons))
 
 user_pin = generate_user_pin()
 computer_pin = generate_computer_pin()
+
+winner = ''
 
 print(f'\n--------PLAYER PIN----------')
 print(f'Your PIN: {user_pin}')
@@ -39,13 +39,17 @@ while Start_Game:
 
     if feed_back_to_user['dead'] == 4 and feed_back_to_user['injured'] == 0:
         Start_Game = False
-    if narrow_down_guess(computer_guesses, user_pin):
-        Start_Game = False
+        winner = 'player'
+    computer_bool = narrow_down_guess(computer_guesses, user_pin)
+    if computer_bool:
+          winner = 'computer'
+          Start_Game = False
     # computer tries to guess the player's pin as well with a random 4 digit guesses
     # computer compares his current guess with all possible combinations of the guess to
     # get the same feedback and narrow down what the user's pin might be
 
-print('\n')
+print('\nTHE GAME HAS ENDED 🙂')
 print('-----------------------RESULTS----------------------')
+print(f'The winner is......{winner.title()}')
 print(f'Your PIN : {user_pin}')
-print(f'Computer PIN : {computer_pin}')
+print(f'Computer PIN : {computer_pin}\nGoodbye 🤗')

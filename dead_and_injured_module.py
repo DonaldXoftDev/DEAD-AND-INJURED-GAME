@@ -99,6 +99,7 @@ def message_feedback(game_feed_back,current_player):
 def narrow_down_guess(comp_curr_guess, user_pin):
     feedback_to_computer = compare_guesses(comp_curr_guess, user_pin)
     message = message_feedback(feedback_to_computer, 'computer')
+
     computer_guess_table.add_row([f'{comp_curr_guess}', f'{message}'])
     print(computer_guess_table)
 
@@ -113,9 +114,7 @@ def narrow_down_guess(comp_curr_guess, user_pin):
     new_possible_pins = new_possibilities
     if feedback_to_computer['dead'] == 4 and feedback_to_computer['injured'] == 0:
         return True
-    else:
-        pass
-
+    return False
 
 # When you generate the list of all possible combination, then you compare each combination with the computer's
 # current guess to try to reproduce the output it got as feedback from the user.
