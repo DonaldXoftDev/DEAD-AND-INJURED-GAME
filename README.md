@@ -2,7 +2,7 @@
 
 Step into the engaging world of Dead and Injured, a game where sharp deduction and strategic thinking are your greatest allies! This project marks another step in my journey as a Python developer, showcasing how code can bring classic logic puzzles to life.
 
-###The Core Challenge:🧠
+1 The Core Challenge:🧠
 ---
 The game revolves around a secret 4-digit code composed of unique numbers (0-9). In each round, you'll take on two key roles:
 
