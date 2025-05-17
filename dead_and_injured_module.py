@@ -1,6 +1,5 @@
 import random
 import itertools
-import prettytable
 from prettytable import PrettyTable
 
 computer_guess_table = PrettyTable()
@@ -21,7 +20,6 @@ def generate_user_pin():
                     print(f'That number has either already been entered! or may not be within the range of 0 - 9!')
             except ValueError:
                 print('That is not a number')
-
     return u_pin
 
 
@@ -67,11 +65,8 @@ def compare_guesses(guesses, pin):
             if guesses[i] == pin[j] and i == j:
                 dead += 1
             elif guesses[i] in pin and i != pin.index(guesses[i]):
-                    inj += 1
-                    break
-
-
-
+                inj += 1
+                break
     return {"dead": dead, 'injured': inj}
 
 def message_feedback(game_feed_back,current_player):
@@ -94,6 +89,8 @@ def message_feedback(game_feed_back,current_player):
 # that will produce the same result
 # the computer will then move those combinations to a new list and then replace the old combination
 # -list with a copy of the new possibilities' list and clear the new list
+# When you generate the list of all possible combination, then you compare each combination with the computer's
+# current guess to try to reproduce the output it got as feedback from the user.
 
 
 def narrow_down_guess(comp_curr_guess, user_pin):
@@ -116,5 +113,4 @@ def narrow_down_guess(comp_curr_guess, user_pin):
         return True
     return False
 
-# When you generate the list of all possible combination, then you compare each combination with the computer's
-# current guess to try to reproduce the output it got as feedback from the user.
+
