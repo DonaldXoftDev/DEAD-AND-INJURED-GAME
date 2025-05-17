@@ -2,8 +2,8 @@
 
 Step into the engaging world of Dead and Injured, a game where sharp deduction and strategic thinking are your greatest allies! This project marks another step in my journey as a Python developer, showcasing how code can bring classic logic puzzles to life.
 
-#The Core Challenge:🧠
-
+###The Core Challenge:🧠
+---
 The game revolves around a secret 4-digit code composed of unique numbers (0-9). In each round, you'll take on two key roles:
 
 1.  **The Codebreaker:** Attempt to decipher the computer's hidden 4-digit pin.
@@ -11,13 +11,13 @@ The game revolves around a secret 4-digit code composed of unique numbers (0-9).
 
 With each guess made by either you or the computer, valuable feedback will be provided in the form of "Dead" and "Injured" clues.
 
-##Understanding the Feedback:##
-
+##Understanding the Feedback:
+---
 * **Dead:** A digit in the guess that is absolutely correct and in the perfect position within the secret code.
 * **Injured:** A digit in the guess that is present in the secret code but is located in a different position.
 
-##How to Play:🔥##
-
+###How to Play:🔥
+---
 1.  **Get Started:** Ensure you have the `dead_and_injured_module.py` file (containing the game logic) and the `arts.py` file (for the logo and welcome image) in the same directory as your main script. Run the main script.
 
 2.  **Welcome and Setup:** You'll be greeted with a visual welcome. The game will then prompt you to enter your own secret 4-digit pin, one unique digit at a time.
@@ -32,8 +32,8 @@ With each guess made by either you or the computer, valuable feedback will be pr
 
 6.  **Play Again?:** You'll be asked if you want to play another round of this engaging battle of wits.
 
-##My Journey as a Python Developer - Crafting This Game:👨‍💻🚀##
-
+###My Journey as a Python Developer - Crafting This Game:👨‍💻🚀
+---
 This project is a tangible outcome of my exploration and growth in the Python programming language. It demonstrates my understanding and application of several key concepts:
 
 * **Modular Design:** Separating the core game logic into the `dead_and_injured_module.py` for better organization and reusability.
