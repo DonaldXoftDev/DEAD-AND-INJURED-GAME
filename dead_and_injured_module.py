@@ -6,39 +6,21 @@ computer_guess_table = PrettyTable()
 computer_guess_table.field_names = ['Computer guesses','Feedback to computer']
 
 new_possible_pins = [list(p) for p in itertools.permutations(range(10), 4)]
-
-def generate_user_pin():
-    u_pin = []
+def gen_pin_or_guess(response):
+    print('\n')
+    pin_or_guess = []
     for i in range(4):
         while True:
             try:
-                user_choice = int(input(f'Enter the pin number{i + 1} from (0 - 9): '))
-                if user_choice not in u_pin and user_choice in range(0, 10):
-                    u_pin.append(user_choice)
+                user_choice = int(input(f'Enter the {response} number{i + 1} from (0 - 9): '))
+                if user_choice not in pin_or_guess and user_choice in range(0, 10):
+                    pin_or_guess.append(user_choice)
                     break
                 else:
                     print(f'That number has either already been entered! or may not be within the range of 0 - 9!')
             except ValueError:
                 print('That is not a number')
-    return u_pin
-
-
-def get_user_guesses():
-    print("\n------------TIME TO GUESS COMPUTER'S PIN-----------------")
-    u_guesses = []
-    for j in range(4):
-        guessing = True
-        while guessing:
-            try:
-                guess = int(input(f'Enter guess number {j + 1}: '))
-                if guess in range(10) and guess not in u_guesses:
-                    u_guesses.append(guess)
-                    guessing = False
-                else:
-                    print('That number has either already been guessed or is not within the range of 0 - 9!')
-            except ValueError:
-                print('That is not a number')
-    return u_guesses
+    return pin_or_guess
 
 
 def generate_computer_pin():
@@ -47,7 +29,10 @@ def generate_computer_pin():
 
 
 def generate_computer_guesses():
-    comp_guesses = random.choice(new_possible_pins)
+    if random.random() < 0.3:
+        comp_guesses = random.sample(range(10), k=4)
+    else:
+        comp_guesses = random.choice(new_possible_pins)
     return comp_guesses
 
 
@@ -88,27 +73,30 @@ def message_feedback(game_feed_back,current_player):
 # possible combinations in the list of possibilities to try and narrow down what the combinations
 # that will produce the same result
 # the computer will then move those combinations to a new list and then replace the old combination
-# -list with a copy of the new possibilities' list and clear the new list
+# -list with a copy of the new possibilities list and clear the new list
 # When you generate the list of all possible combination, then you compare each combination with the computer's
 # current guess to try to reproduce the output it got as feedback from the user.
 
 
 def narrow_down_guess(comp_curr_guess, user_pin):
+    guess_logically = False
     feedback_to_computer = compare_guesses(comp_curr_guess, user_pin)
     message = message_feedback(feedback_to_computer, 'computer')
+    if not guess_logically:
+
+        global new_possible_pins
+        new_possibilities = []
+
+        for pin in new_possible_pins:
+            pin_feed_back = compare_guesses(comp_curr_guess, pin)
+            if pin_feed_back['dead'] == feedback_to_computer['dead'] and pin_feed_back["injured"] == feedback_to_computer['injured']:
+                new_possibilities.append(pin)
+
+        new_possible_pins[:] = new_possibilities
 
     computer_guess_table.add_row([f'{comp_curr_guess}', f'{message}'])
     print(computer_guess_table)
 
-    global new_possible_pins
-    new_possibilities = []
-
-    for pin in new_possible_pins:
-        pin_feed_back = compare_guesses(comp_curr_guess, pin)
-        if pin_feed_back['dead'] == feedback_to_computer['dead'] and pin_feed_back["injured"] == feedback_to_computer['injured']:
-            new_possibilities.append(pin)
-
-    new_possible_pins = new_possibilities
     if feedback_to_computer['dead'] == 4 and feedback_to_computer['injured'] == 0:
         return True
     return False
