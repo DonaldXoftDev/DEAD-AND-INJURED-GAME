@@ -12,7 +12,7 @@ What I Learned Making This: This was a fun way to play with organizing code into
 
 Wanna Play Around? Here's how:
 ----
- * Grab the code: git clone <>
+ * Grab the code: clone the repo
  * Run the main Python file.
  * Just follow what it says on the screen!
 Have fun trying to crack the code (and watching my computer try too)! Let me know what you think! 😄
