@@ -2,16 +2,13 @@ import random
 import itertools
 from prettytable import PrettyTable
 
-computer_guess_table = PrettyTable()
-computer_guess_table.field_names = ['Computer guesses','Feedback to computer']
-
-new_possible_pins = [list(p) for p in itertools.permutations(range(10), 4)]
 
 def gen_pin_or_guess(response):
     """this function allows the user to either enter a pin or guess depending on a response input
     and returns that pin or guess
     """
     print('\n')
+    print(f'------------ENTER YOUR {response.upper()}---------')
     pin_or_guess = []
     for i in range(4):
         while True:
@@ -27,20 +24,20 @@ def gen_pin_or_guess(response):
     return pin_or_guess
 
 
-def generate_computer_pin():
+def generate_computer_pin(pin_list):
     """this returns the computer's pin which is picked from the list of all possible pins."""
-    comp_pin = random.choice(new_possible_pins)
+    comp_pin = random.choice(pin_list)
     return comp_pin
 
 
-def generate_computer_guesses():
+def generate_computer_guesses(pin_list):
     """this function helps to decide when the computer should think logically or not
     so that the guesses it makes will be based on probability
     and returns it."""
     if random.random() < 0.3:
         comp_guesses = random.sample(range(10), k=4)
     else:
-        comp_guesses = random.choice(new_possible_pins)
+        comp_guesses = random.choice(pin_list)
     return comp_guesses
 
 
@@ -90,7 +87,7 @@ def message_feedback(game_feed_back):
 # current guess to try to reproduce the output it got as feedback from the user.
 
 
-def computer_guessing_strategy(comp_curr_guess, user_pin):
+def computer_guessing_strategy(comp_curr_guess, user_pin, possible_pins):
     """this determines how the computer guesses(whether flawed guesses or informed guesses)
      and what feedback it should give based on its guesses, how to display its feedback and return a boolean when the
      computer has correctly guessed the user's pin."""
@@ -99,21 +96,16 @@ def computer_guessing_strategy(comp_curr_guess, user_pin):
     message = message_feedback(feedback_to_computer)
     if not guess_logically:
 
-        global new_possible_pins
         new_possibilities = []
 
-        for pin in new_possible_pins:
+        for pin in possible_pins:
             pin_feed_back = compare_guesses(comp_curr_guess, pin)
-            if pin_feed_back['dead'] == feedback_to_computer['dead'] and pin_feed_back["injured"] == feedback_to_computer['injured']:
+            if (pin_feed_back['dead'] == feedback_to_computer['dead'] and
+                pin_feed_back["injured"] == feedback_to_computer['injured']):
+
                 new_possibilities.append(pin)
 
-        new_possible_pins[:] = new_possibilities
-
-    computer_guess_table.add_row([f'{comp_curr_guess}', f'{message}'])
-    print(computer_guess_table)
-
-    if feedback_to_computer['dead'] == 4 and feedback_to_computer['injured'] == 0:
-        return True
-    return False
+        possible_pins[:] = new_possibilities
+    return feedback_to_computer, message
 
 
